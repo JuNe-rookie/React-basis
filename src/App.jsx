@@ -1,27 +1,18 @@
-import { useState, useEffect } from 'react'
+import useWindowScroll from "./hooks/useWindowScroll"
+import useLocalStorange from "./hooks/useLocalStorange"
 
 
 function App() {
-	const [conunt, addCount] = useState(0)
-	const [name, setName] = useState("haha")
-	useEffect(() => {
-		console.log("副作用执行了")
-	}, [conunt, name])
-
-	const changeName = () => {
-		setName("jajaajaj")
-	}
+	const [y] = useWindowScroll()
+	const [message, setMessage] = useLocalStorange('hook-key', 'jojo')
+	setTimeout(() => {
+		setMessage("111")
+	}, 5000)
 	return (
-		<>
-			<div>{conunt}</div>
-			<button onClick={() => addCount(conunt + 1)}>点击+1</button>
-			<hr />
-			<div>
-				{name}
-				<button onClick={changeName}>点击改名</button>
-			</div>
-		</>
+		<div style={{ height: "1200px" }}>
+			<div>{y}</div>
+			<div>{message}</div>
+		</div>
 	)
 }
-
 export default App
